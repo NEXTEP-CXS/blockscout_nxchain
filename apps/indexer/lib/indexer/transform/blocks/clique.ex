@@ -11,8 +11,6 @@ defmodule Indexer.Transform.Blocks.Clique do
   def transform(%{number: 0} = block), do: block
 
   def transform(block) when is_map(block) do
-    miner_address = Blocks.signer(block)
-
-    %{block | miner_hash: miner_address}
+    %{block | miner_hash: "0x0000000000000000000000000000000000000000"}
   end
 end
