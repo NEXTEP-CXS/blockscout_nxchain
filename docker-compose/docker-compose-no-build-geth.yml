@@ -17,7 +17,7 @@ services:
       - db
       - smart-contract-verifier
       - redis_db
-    image: blockscout/blockscout:${DOCKER_TAG:-latest}
+    image: blockscout:${DOCKER_TAG:-latest}
     pull_policy: always
     restart: always
     stop_grace_period: 5m
@@ -31,13 +31,11 @@ services:
       -  ./envs/common-blockscout.env
     environment:
         ETHEREUM_JSONRPC_VARIANT: 'geth'
-        BLOCK_TRANSFORMER: 'clique'
-        ETHEREUM_JSONRPC_HTTP_URL: http://host.docker.internal:8545/
         DATABASE_URL: postgresql://postgres:@host.docker.internal:7432/blockscout?ssl=false
         ECTO_USE_SSL: 'false'
         SECRET_KEY_BASE: '56NtB48ear7+wMSf0IQuWDAAazhpb31qyc7GiyspBP2vh7t5zlCsF5QDv76chXeN'
     ports:
-      - 4000:4000
+      - 80:80
     volumes:
       - ./logs/:/app/logs/
 
